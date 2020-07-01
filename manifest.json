@@ -1,18 +1,27 @@
 {
-    "manifest_version" : 2,
-    "name" : "Insta Wall Eradicator",
-    "version" : "0.1",
-    "content_scripts" : 
+    "manifest_version": 2,
+    "name": "Insta Wall Eradicator",
+    "version": "0.1",
+    "content_scripts": 
     [
         {
-            "matches" :
+            "matches":
             [
                 "<all_urls>"
             ],
             "js":
             [
+                "jquery-3.5.1.min.js",
                 "content.js"
             ]
         }
-    ]
+    ],
+    "browser_action": 
+    {
+        "default_icon": "icon.png"
+    },
+    "background":
+    {
+        "scripts": ["background.js"]
+    }
 }
