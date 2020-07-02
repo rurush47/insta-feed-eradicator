@@ -7,16 +7,15 @@
         {
             "matches":
             [
-                "<all_urls>"
+                "https://www.instagram.com/*"
             ],
             "js":
             [
-                "jquery-3.5.1.min.js",
                 "content.js"
             ]
         }
     ],
-    "page_action":
+    "browser_action":
     {
         "default_icon": "icon.png",
         "default_popup": "popup.html"
