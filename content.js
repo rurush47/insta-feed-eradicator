@@ -1,18 +1,21 @@
-// content.js
+storySelector = '.zGtbP';
+feedSelector = '._8Rm4L';
+loadingIconSelector = '.By4nA';
+
 
 chrome.runtime.onMessage.addListener(function (request) 
 {
     if(request == 'removeStories')
     {
-        var storyDiv = document.querySelector('.zGtbP');
+        var storyDiv = document.querySelector(storySelector);
         storyDiv.parentElement.removeChild(storyDiv);
     }
     if(request == 'removeFeed')
     {
-        var feedDiv = document.querySelector('._8Rm4L').parentElement.parentElement;
+        var feedDiv = document.querySelector(feedSelector).parentElement.parentElement;
         feedDiv.parentElement.removeChild(feedDiv);
 
-        var loadingIcon = document.querySelector('.By4nA');
+        var loadingIcon = document.querySelector(loadingIconSelector);
         loadingIcon.parentElement.removeChild(loadingIcon);
     }
 });
