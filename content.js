@@ -9,6 +9,10 @@ chrome.runtime.onMessage.addListener(function (request)
     }
     if(request == 'removeFeed')
     {
-        alert("remove feed")
+        var feedDiv = document.querySelector('._8Rm4L').parentElement.parentElement;
+        feedDiv.parentElement.removeChild(feedDiv);
+
+        var loadingIcon = document.querySelector('.By4nA');
+        loadingIcon.parentElement.removeChild(loadingIcon);
     }
 });
