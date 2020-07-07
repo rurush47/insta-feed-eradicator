@@ -1,36 +1,43 @@
-function createButtonListener(idSelector, onClick)
-{
-  return function()
-  {
-    document.querySelector(idSelector).addEventListener('click', onClick, false);
-  }
+function createCheckboxListeners() {
+    const storiesCheckbox = document.getElementById('storiesCheck');
+    const feedCheckbox = document.getElementById('feedCheck');
+
+    chrome.storage.sync.get(['story'], function (result) {
+        storiesCheckbox.checked = result.story;
+    });
+
+    chrome.storage.sync.get(['feed'], function (result) {
+        feedCheckbox.checked = result.feed;
+    });
+
+    addStorageBoolSetter(storiesCheckbox, 'change', 'story');
+    addStorageBoolSetter(feedCheckbox, 'change', 'feed');
 }
 
-function sendChromeCurrentTabMessage(message)
-{
-  chrome.tabs.query({currentWindow: true, active: true}, 
-    function (tabs)
-    {
-      chrome.tabs.sendMessage(tabs[0].id, message);
-    })
+function addStorageBoolSetter(element, eventName, key) {
+    var data = {};
+
+    element.addEventListener(eventName, (event) => {
+        if (event.target.checked) {
+            data[key] = true;
+            chrome.storage.sync.set(data);
+        }
+        else {
+            data[key] = false;
+            chrome.storage.sync.set(data);
+        };
+    });
 }
 
-function onClickRemoveStories()
-{
-  sendChromeCurrentTabMessage('removeStories');      
-}
-
-function onClickRemoveFeed()
-{
-  sendChromeCurrentTabMessage('removeFeed');      
+function calc() {
+    if (document.getElementById('storiesCheck').checked) {
+        sendChromeCurrentTabMessage({ key: 'removeStories', value: true });
+    } else {
+        sendChromeCurrentTabMessage({ key: 'removeStories', value: false });
+    }
 }
 
 document.addEventListener(
-  'DOMContentLoaded',
-  createButtonListener('#removeStories', onClickRemoveStories),
-  false);
-
-document.addEventListener(
-  'DOMContentLoaded',
-  createButtonListener('#removeFeed', onClickRemoveFeed),
-  false);
+    'DOMContentLoaded',
+    createCheckboxListeners(),
+    false);

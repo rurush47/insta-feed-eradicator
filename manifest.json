@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Insta Wall Eradicator",
-    "version": "0.1",
+    "version": "0.9",
     "content_scripts": 
     [
         {
