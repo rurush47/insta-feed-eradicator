@@ -46,7 +46,8 @@ function enableSuggestions()
     addStyle(suggestionsSelector + enableString);
 }
 
-$(document).ready(function () {
+function initContent()
+{
     chrome.storage.sync.get(['story'], function (result) {
         if (result.story == true) {
             disableStory();
@@ -57,7 +58,12 @@ $(document).ready(function () {
             disableFeed();
         }
     });
-})
+    chrome.storage.sync.get(['suggestions'], function (result) {
+        if (result.suggestions == true) {
+            disableSuggestions();
+        }
+    });
+}
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
     for (var key in changes) {
@@ -100,3 +106,5 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
         }
     }
 });
+
+initContent();
