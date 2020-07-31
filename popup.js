@@ -1,6 +1,7 @@
 function createCheckboxListeners() {
     const storiesCheckbox = document.getElementById('storiesCheck');
     const feedCheckbox = document.getElementById('feedCheck');
+    const suggestionsCheckbox = document.getElementById('suggestionsCheck');
 
     chrome.storage.sync.get(['story'], function (result) {
         storiesCheckbox.checked = result.story;
@@ -10,8 +11,13 @@ function createCheckboxListeners() {
         feedCheckbox.checked = result.feed;
     });
 
+    chrome.storage.sync.get(['suggestions'], function (result) {
+        suggestionsCheckbox.checked = result.suggestions;
+    });
+
     addStorageBoolSetter(storiesCheckbox, 'change', 'story');
     addStorageBoolSetter(feedCheckbox, 'change', 'feed');
+    addStorageBoolSetter(suggestionsCheckbox, 'change', 'suggestions');
 }
 
 function addStorageBoolSetter(element, eventName, key) {
@@ -27,14 +33,6 @@ function addStorageBoolSetter(element, eventName, key) {
             chrome.storage.sync.set(data);
         };
     });
-}
-
-function calc() {
-    if (document.getElementById('storiesCheck').checked) {
-        sendChromeCurrentTabMessage({ key: 'removeStories', value: true });
-    } else {
-        sendChromeCurrentTabMessage({ key: 'removeStories', value: false });
-    }
 }
 
 document.addEventListener(

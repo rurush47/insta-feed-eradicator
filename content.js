@@ -1,8 +1,11 @@
+//css selectors
 storySelector = '.zGtbP';
 feedSelector = '.cGcGK div:nth-child(2) ._8Rm4L';
 postSelector = '_8Rm4L'
 loadingIconSelector = '.By4nA';
 storyNameSelector = '.eebAO';
+suggestionsSelector = '._8UZ6e';
+//enable | disable css
 disableString = '{display:none}';
 enableString = '{display:initial}';
 
@@ -23,6 +26,11 @@ function disableStory() {
     addStyle(storySelector + disableString);
 }
 
+function disableSuggestions()
+{
+    addStyle(suggestionsSelector + disableString);
+}
+
 function enableFeed() {
     addStyle(feedSelector + enableString);
     addStyle(postSelector + enableString);
@@ -31,6 +39,11 @@ function enableFeed() {
 
 function enableStory() {
     addStyle(storySelector + enableString);
+}
+
+function enableSuggestions()
+{
+    addStyle(suggestionsSelector + enableString);
 }
 
 $(document).ready(function () {
@@ -71,6 +84,18 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
             if (newValue == false) {
                 console.log("feed false");
                 enableFeed();
+            }
+        }
+
+        if(key == "suggestions"){
+            var newValue = storageChange.newValue;
+            if (newValue == true) {
+                console.log("suggestions true");
+                disableSuggestions();
+            }
+            if (newValue == false) {
+                console.log("suggestions false");
+                enableSuggestions();
             }
         }
     }
