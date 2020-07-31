@@ -1,5 +1,5 @@
 storySelector = '.zGtbP';
-feedSelector = '.cGcGK div:nth-child(2)';
+feedSelector = '.cGcGK div:nth-child(2) ._8Rm4L';
 postSelector = '_8Rm4L'
 loadingIconSelector = '.By4nA';
 storyNameSelector = '.eebAO';
