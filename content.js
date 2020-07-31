@@ -2,6 +2,7 @@ storySelector = '.zGtbP';
 feedSelector = '.cGcGK div:nth-child(2)';
 postSelector = '_8Rm4L'
 loadingIconSelector = '.By4nA';
+storyNameSelector = '.eebAO';
 disableString = '{display:none}';
 enableString = '{display:initial}';
 
@@ -15,6 +16,7 @@ function disableFeed() {
     addStyle(feedSelector + disableString);
     addStyle(postSelector + disableString);
     addStyle(loadingIconSelector + disableString);
+    addStyle(storyNameSelector + enableString);
 }
 
 function disableStory() {
