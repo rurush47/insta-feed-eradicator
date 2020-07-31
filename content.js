@@ -1,6 +1,6 @@
 //css selectors
 storySelector = '.zGtbP';
-feedSelector = '.cGcGK div:nth-child(2) ._8Rm4L';
+feedSelector = '._1SP8R div:nth-child(1) div:nth-child(2) ._8Rm4L';
 postSelector = '_8Rm4L'
 loadingIconSelector = '.By4nA';
 storyNameSelector = '.eebAO';
