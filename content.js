@@ -72,11 +72,9 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
         if (key == 'story') {
             var newValue = storageChange.newValue;
             if (newValue == true) {
-                console.log("story true");
                 disableStory();
             }
             if (newValue == false) {
-                console.log("story false");
                 enableStory();
             }
         }
@@ -84,11 +82,9 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
         if (key == 'feed') {
             var newValue = storageChange.newValue;
             if (newValue == true) {
-                console.log("feed true");
                 disableFeed();
             }
             if (newValue == false) {
-                console.log("feed false");
                 enableFeed();
             }
         }
@@ -96,11 +92,9 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
         if(key == "suggestions"){
             var newValue = storageChange.newValue;
             if (newValue == true) {
-                console.log("suggestions true");
                 disableSuggestions();
             }
             if (newValue == false) {
-                console.log("suggestions false");
                 enableSuggestions();
             }
         }
