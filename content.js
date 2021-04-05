@@ -5,6 +5,8 @@ postSelector = '_8Rm4L'
 loadingIconSelector = '.By4nA';
 storyNameSelector = '.eebAO';
 suggestionsSelector = '._8UZ6e';
+HomeFeedButtom = 'div._47KiJ > div.Fifk5:first-child';
+FindPeople = 'div.Fifk5:nth-child(3)';
 //enable | disable css
 disableString = '{display:none}';
 enableString = '{display:initial}';
@@ -20,6 +22,7 @@ function disableFeed() {
     addStyle(postSelector + disableString);
     addStyle(loadingIconSelector + disableString);
     addStyle(storyNameSelector + enableString);
+	addStyle(HomeFeedButtom + disableString);
 }
 
 function disableStory() {
@@ -29,12 +32,14 @@ function disableStory() {
 function disableSuggestions()
 {
     addStyle(suggestionsSelector + disableString);
+	addStyle(FindPeople + disableString);
 }
 
 function enableFeed() {
     addStyle(feedSelector + enableString);
     addStyle(postSelector + enableString);
     addStyle(loadingIconSelector + enableString);
+	addStyle(HomeFeedButtom + enableString);
 }
 
 function enableStory() {
