@@ -6,7 +6,7 @@ A browser extension that lets you hide your Instagram new posts feed, stories an
 
 
 
-++ Added compare master repo:  hiding icons for the news feed and suggestions
+++ hiding icons for the news feed and suggestions
 
 ![Alt Text](https://i.ibb.co/3mmW5zz/no-icons.png)
 
