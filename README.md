@@ -1,6 +1,7 @@
 # Insta Feed Eradicator (With no feed icons)
 
 A browser extension that lets you hide your Instagram new posts feed, stories and suggested users to follow.
+Chrome Web Store: https://chrome.google.com/webstore/detail/insta-feed-eradicator/opmlbbpajagbjblnnhjhiedihdnlochl?hl=en
 
 ![Alt Text](https://media.giphy.com/media/kytd291VNPKLA8zeFl/giphy.gif)
 
