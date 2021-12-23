@@ -1,4 +1,5 @@
 //css selectors
+exploreSelector = '.K6yM_'
 storySelector = '.zGtbP';
 feedSelector = '._1SP8R div:nth-child(1) div:nth-child(2) ._8Rm4L';
 postSelector = '_8Rm4L'
@@ -36,6 +37,7 @@ function disableSuggestions()
 }
 function disableExplore()
 {
+    addStyle(exploreSelector + disableString);
     document.querySelectorAll("a[href='/explore/']")[0].style.display = 'none';
     document.querySelectorAll("a[href='/explore/']")[0].parentElement.style.margin = '0';
 }
@@ -57,6 +59,7 @@ function enableSuggestions()
 }
 function enableExplore()
 {
+    addStyle(exploreSelector + enableString);
     document.querySelectorAll("a[href='/explore/']")[0].style.display = '';
     document.querySelectorAll("a[href='/explore/']")[0].parentElement.style.margin = '';
 }
