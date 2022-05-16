@@ -1,9 +1,8 @@
 //css selectors
 storySelector = '.zGtbP';
-feedSelector = '._1SP8R div:nth-child(1) div:nth-child(2) ._8Rm4L';
+feedSelector = '._1SP8R div:nth-child(1) div:nth-child(3) ._8Rm4L';
 postSelector = '_8Rm4L'
 loadingIconSelector = '.By4nA';
-storyNameSelector = '.eebAO';
 suggestionsSelector = '._8UZ6e';
 HomeFeedButtom = 'div._47KiJ > div.Fifk5:first-child';
 FindPeople = 'div.Fifk5:nth-child(3)';
@@ -21,7 +20,6 @@ function disableFeed() {
     addStyle(feedSelector + disableString);
     addStyle(postSelector + disableString);
     addStyle(loadingIconSelector + disableString);
-    addStyle(storyNameSelector + enableString);
 	addStyle(HomeFeedButtom + disableString);
 }
 
