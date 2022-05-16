@@ -1,4 +1,5 @@
 //css selectors
+exploreSelector = '.K6yM_'
 storySelector = '.zGtbP';
 feedSelector = '._1SP8R div:nth-child(1) div:nth-child(3) ._8Rm4L';
 postSelector = '_8Rm4L'
@@ -32,6 +33,12 @@ function disableSuggestions()
     addStyle(suggestionsSelector + disableString);
 	addStyle(FindPeople + disableString);
 }
+function disableExplore()
+{
+    addStyle(exploreSelector + disableString);
+    document.querySelectorAll("a[href='/explore/']")[0].style.display = 'none';
+    document.querySelectorAll("a[href='/explore/']")[0].parentElement.style.margin = '0';
+}
 
 function enableFeed() {
     addStyle(feedSelector + enableString);
@@ -47,6 +54,12 @@ function enableStory() {
 function enableSuggestions()
 {
     addStyle(suggestionsSelector + enableString);
+}
+function enableExplore()
+{
+    addStyle(exploreSelector + enableString);
+    document.querySelectorAll("a[href='/explore/']")[0].style.display = '';
+    document.querySelectorAll("a[href='/explore/']")[0].parentElement.style.margin = '';
 }
 
 function initContent()
@@ -64,6 +77,11 @@ function initContent()
     chrome.storage.sync.get(['suggestions'], function (result) {
         if (result.suggestions == true) {
             disableSuggestions();
+        }
+    });
+    chrome.storage.sync.get(['explore'], function (result) {
+        if (result.explore == true) {
+            disableExplore();
         }
     });
 }
@@ -99,6 +117,16 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
             }
             if (newValue == false) {
                 enableSuggestions();
+            }
+        }
+
+        if(key == "explore"){
+            var newValue = storageChange.newValue;
+            if (newValue == true) {
+                disableExplore();
+            }
+            if (newValue == false) {
+                enableExplore();
             }
         }
     }
