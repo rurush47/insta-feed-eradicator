@@ -1,135 +1,58 @@
-//css selectors
-exploreSelector = '.K6yM_'
-storySelector = '.zGtbP';
-feedSelector = '._1SP8R div:nth-child(1) div:nth-child(3) ._8Rm4L';
-postSelector = '_8Rm4L'
-loadingIconSelector = '.By4nA';
-suggestionsSelector = '._8UZ6e';
-HomeFeedButtom = 'div._47KiJ > div.Fifk5:first-child';
-FindPeople = 'div.Fifk5:nth-child(3)';
-//enable | disable css
-disableString = '{display:none}';
-enableString = '{display:initial}';
-
-function addStyle(styleString) {
-    const style = document.createElement('style');
-    style.textContent = styleString;
-    document.head.append(style);
-}
-
-function disableFeed() {
-    addStyle(feedSelector + disableString);
-    addStyle(postSelector + disableString);
-    addStyle(loadingIconSelector + disableString);
-	addStyle(HomeFeedButtom + disableString);
-}
-
-function disableStory() {
-    addStyle(storySelector + disableString);
-}
-
-function disableSuggestions()
+var elementsDict =
 {
-    addStyle(suggestionsSelector + disableString);
-	addStyle(FindPeople + disableString);
-}
-function disableExplore()
-{
-    addStyle(exploreSelector + disableString);
-    document.querySelectorAll("a[href='/explore/']")[0].style.display = 'none';
-    document.querySelectorAll("a[href='/explore/']")[0].parentElement.style.margin = '0';
+    story: '._a3gq ._aac4',
+    feed: '._a3gq ._ab9m',
+    suggestions: '._a3gq ._aak3',
+    explore: "a[href='/explore/']"
 }
 
-function enableFeed() {
-    addStyle(feedSelector + enableString);
-    addStyle(postSelector + enableString);
-    addStyle(loadingIconSelector + enableString);
-	addStyle(HomeFeedButtom + enableString);
+var valueDict = 
+{
+    true: 'none',
+    false: 'initial'
 }
 
-function enableStory() {
-    addStyle(storySelector + enableString);
+function changeDisplay(element, value)
+{
+    document.querySelectorAll(element)[0].style.display = value;
 }
 
-function enableSuggestions()
+async function initContent()
 {
-    addStyle(suggestionsSelector + enableString);
-}
-function enableExplore()
-{
-    addStyle(exploreSelector + enableString);
-    document.querySelectorAll("a[href='/explore/']")[0].style.display = '';
-    document.querySelectorAll("a[href='/explore/']")[0].parentElement.style.margin = '';
-}
-
-function initContent()
-{
-    chrome.storage.sync.get(['story'], function (result) {
-        if (result.story == true) {
-            disableStory();
-        }
+    var promise = pKey => new Promise((resolve, reject) => {
+        chrome.storage.sync.get([pKey], function (result) {
+            resolve(result);
+        });
     });
-    chrome.storage.sync.get(['feed'], function (result) {
-        if (result.feed == true) {
-            disableFeed();
+
+    for (var elementKey in elementsDict)
+    {
+        var storageResult = await promise(elementKey);
+        if (storageResult[elementKey] == true)
+        {
+            changeDisplay(elementsDict[elementKey], valueDict.true);
         }
-    });
-    chrome.storage.sync.get(['suggestions'], function (result) {
-        if (result.suggestions == true) {
-            disableSuggestions();
-        }
-    });
-    chrome.storage.sync.get(['explore'], function (result) {
-        if (result.explore == true) {
-            disableExplore();
-        }
-    });
+    }
 }
 
-chrome.storage.onChanged.addListener(function (changes, namespace) {
-    for (var key in changes) {
+chrome.storage.onChanged.addListener(function (changes, namespace)
+{
+    for (var key in changes)
+    {
         var storageChange = changes[key];
-
-        if (key == 'story') {
-            var newValue = storageChange.newValue;
-            if (newValue == true) {
-                disableStory();
-            }
-            if (newValue == false) {
-                enableStory();
-            }
-        }
-
-        if (key == 'feed') {
-            var newValue = storageChange.newValue;
-            if (newValue == true) {
-                disableFeed();
-            }
-            if (newValue == false) {
-                enableFeed();
-            }
-        }
-
-        if(key == "suggestions"){
-            var newValue = storageChange.newValue;
-            if (newValue == true) {
-                disableSuggestions();
-            }
-            if (newValue == false) {
-                enableSuggestions();
-            }
-        }
-
-        if(key == "explore"){
-            var newValue = storageChange.newValue;
-            if (newValue == true) {
-                disableExplore();
-            }
-            if (newValue == false) {
-                enableExplore();
-            }
-        }
+        changeDisplay(elementsDict[key], valueDict[storageChange.newValue]);
     }
 });
 
-initContent();
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
+document.onreadystatechange = async function ()
+{
+    if (document.readyState === 'complete')
+    {
+        await delay(1000);
+        initContent();
+    }
+}
